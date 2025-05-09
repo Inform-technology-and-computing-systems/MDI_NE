@@ -1,0 +1,12 @@
+C:\Users\yarov\source\repos\MDIPaint\MDIPaint\bin\Debug\MDIPaint.exe.config
+C:\Users\yarov\source\repos\MDIPaint\MDIPaint\bin\Debug\MDIPaint.exe
+C:\Users\yarov\source\repos\MDIPaint\MDIPaint\bin\Debug\MDIPaint.pdb
+C:\Users\yarov\source\repos\MDIPaint\MDIPaint\obj\Debug\MDIPaint.csproj.AssemblyReference.cache
+C:\Users\yarov\source\repos\MDIPaint\MDIPaint\obj\Debug\MDIPaint.AboutForm.resources
+C:\Users\yarov\source\repos\MDIPaint\MDIPaint\obj\Debug\MDIPaint.DocumentForm.resources
+C:\Users\yarov\source\repos\MDIPaint\MDIPaint\obj\Debug\MDIPaint.MainForm.resources
+C:\Users\yarov\source\repos\MDIPaint\MDIPaint\obj\Debug\MDIPaint.Properties.Resources.resources
+C:\Users\yarov\source\repos\MDIPaint\MDIPaint\obj\Debug\MDIPaint.csproj.GenerateResource.cache
+C:\Users\yarov\source\repos\MDIPaint\MDIPaint\obj\Debug\MDIPaint.csproj.CoreCompileInputs.cache
+C:\Users\yarov\source\repos\MDIPaint\MDIPaint\obj\Debug\MDIPaint.exe
+C:\Users\yarov\source\repos\MDIPaint\MDIPaint\obj\Debug\MDIPaint.pdb

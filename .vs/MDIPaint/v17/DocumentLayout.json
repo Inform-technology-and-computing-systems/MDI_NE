@@ -1,0 +1,107 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\yarov\\source\\repos\\MDIPaint\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{CEF68B3D-7442-4C67-AEB7-D72C4DE21B7A}|MDIPaint\\MDIPaint.csproj|c:\\users\\yarov\\source\\repos\\mdipaint\\mdipaint\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CEF68B3D-7442-4C67-AEB7-D72C4DE21B7A}|MDIPaint\\MDIPaint.csproj|solutionrelative:mdipaint\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CEF68B3D-7442-4C67-AEB7-D72C4DE21B7A}|MDIPaint\\MDIPaint.csproj|C:\\Users\\yarov\\source\\repos\\MDIPaint\\mdipaint\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{CEF68B3D-7442-4C67-AEB7-D72C4DE21B7A}|MDIPaint\\MDIPaint.csproj|solutionrelative:mdipaint\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CEF68B3D-7442-4C67-AEB7-D72C4DE21B7A}|MDIPaint\\MDIPaint.csproj|C:\\Users\\yarov\\source\\repos\\MDIPaint\\mdipaint\\documentform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CEF68B3D-7442-4C67-AEB7-D72C4DE21B7A}|MDIPaint\\MDIPaint.csproj|solutionrelative:mdipaint\\documentform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CEF68B3D-7442-4C67-AEB7-D72C4DE21B7A}|MDIPaint\\MDIPaint.csproj|C:\\Users\\yarov\\source\\repos\\MDIPaint\\mdipaint\\documentform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{CEF68B3D-7442-4C67-AEB7-D72C4DE21B7A}|MDIPaint\\MDIPaint.csproj|solutionrelative:mdipaint\\documentform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CEF68B3D-7442-4C67-AEB7-D72C4DE21B7A}|MDIPaint\\MDIPaint.csproj|C:\\Users\\yarov\\source\\repos\\MDIPaint\\mdipaint\\aboutform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{CEF68B3D-7442-4C67-AEB7-D72C4DE21B7A}|MDIPaint\\MDIPaint.csproj|solutionrelative:mdipaint\\aboutform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 4,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "DocumentForm.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\yarov\\source\\repos\\MDIPaint\\MDIPaint\\DocumentForm.cs",
+              "RelativeDocumentMoniker": "MDIPaint\\DocumentForm.cs",
+              "ToolTip": "C:\\Users\\yarov\\source\\repos\\MDIPaint\\MDIPaint\\DocumentForm.cs [Design]",
+              "RelativeToolTip": "MDIPaint\\DocumentForm.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-18T18:50:47.193Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "DocumentForm.cs",
+              "DocumentMoniker": "C:\\Users\\yarov\\source\\repos\\MDIPaint\\MDIPaint\\DocumentForm.cs",
+              "RelativeDocumentMoniker": "MDIPaint\\DocumentForm.cs",
+              "ToolTip": "C:\\Users\\yarov\\source\\repos\\MDIPaint\\MDIPaint\\DocumentForm.cs",
+              "RelativeToolTip": "MDIPaint\\DocumentForm.cs",
+              "ViewState": "AgIAADEAAAAAAAAAAAAYwGkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-18T18:55:32.238Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MainForm.cs",
+              "DocumentMoniker": "C:\\Users\\yarov\\source\\repos\\MDIPaint\\MDIPaint\\MainForm.cs",
+              "RelativeDocumentMoniker": "MDIPaint\\MainForm.cs",
+              "ToolTip": "C:\\Users\\yarov\\source\\repos\\MDIPaint\\MDIPaint\\MainForm.cs",
+              "RelativeToolTip": "MDIPaint\\MainForm.cs",
+              "ViewState": "AgIAALUAAAAAAAAAAAAgwNEAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-18T18:19:45.566Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "MainForm.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\yarov\\source\\repos\\MDIPaint\\MDIPaint\\MainForm.cs",
+              "RelativeDocumentMoniker": "MDIPaint\\MainForm.cs",
+              "ToolTip": "C:\\Users\\yarov\\source\\repos\\MDIPaint\\MDIPaint\\MainForm.cs [Design]",
+              "RelativeToolTip": "MDIPaint\\MainForm.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-18T18:12:27.735Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "AboutForm.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\yarov\\source\\repos\\MDIPaint\\MDIPaint\\AboutForm.cs",
+              "RelativeDocumentMoniker": "MDIPaint\\AboutForm.cs",
+              "ToolTip": "C:\\Users\\yarov\\source\\repos\\MDIPaint\\MDIPaint\\AboutForm.cs [Design]",
+              "RelativeToolTip": "MDIPaint\\AboutForm.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-18T19:42:43.209Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
