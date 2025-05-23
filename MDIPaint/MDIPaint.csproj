@@ -52,6 +52,12 @@
     <Compile Include="AboutForm.Designer.cs">
       <DependentUpon>AboutForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="CanvasSizeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CanvasSizeForm.Designer.cs">
+      <DependentUpon>CanvasSizeForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="DocumentForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -68,6 +74,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="AboutForm.resx">
       <DependentUpon>AboutForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CanvasSizeForm.resx">
+      <DependentUpon>CanvasSizeForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DocumentForm.resx">
       <DependentUpon>DocumentForm.cs</DependentUpon>

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.файлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -56,6 +57,15 @@
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.tstxtPenWidth = new System.Windows.Forms.ToolStripTextBox();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsbPen = new System.Windows.Forms.ToolStripButton();
+            this.tsbLine = new System.Windows.Forms.ToolStripButton();
+            this.tsbEllipse = new System.Windows.Forms.ToolStripButton();
+            this.tsbEraser = new System.Windows.Forms.ToolStripButton();
+            this.tsbToggleFill = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripComboBoxWidth = new System.Windows.Forms.ToolStripComboBox();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -210,7 +220,15 @@
             this.tsddbColor,
             this.toolStripSeparator3,
             this.toolStripLabel1,
-            this.tstxtPenWidth});
+            this.tstxtPenWidth,
+            this.toolStripSeparator5,
+            this.tsbPen,
+            this.tsbLine,
+            this.tsbEllipse,
+            this.tsbEraser,
+            this.tsbToggleFill,
+            this.toolStripSeparator4,
+            this.toolStripComboBoxWidth});
             this.toolStrip1.Location = new System.Drawing.Point(0, 24);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(800, 25);
@@ -282,7 +300,73 @@
             this.tstxtPenWidth.Name = "tstxtPenWidth";
             this.tstxtPenWidth.Size = new System.Drawing.Size(100, 25);
             this.tstxtPenWidth.Text = "3";
-            this.tstxtPenWidth.TextChanged += new System.EventHandler(this.tstxtPenWidth_Click);
+            this.tstxtPenWidth.Validated += new System.EventHandler(this.tstxtPenWidth_Validated);
+            // 
+            // toolStripSeparator5
+            // 
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(6, 25);
+            // 
+            // tsbPen
+            // 
+            this.tsbPen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbPen.Image = ((System.Drawing.Image)(resources.GetObject("tsbPen.Image")));
+            this.tsbPen.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbPen.Name = "tsbPen";
+            this.tsbPen.Size = new System.Drawing.Size(23, 22);
+            this.tsbPen.Text = "Перо";
+            this.tsbPen.Click += new System.EventHandler(this.ToolStripButtonTool_Click);
+            // 
+            // tsbLine
+            // 
+            this.tsbLine.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbLine.Image = ((System.Drawing.Image)(resources.GetObject("tsbLine.Image")));
+            this.tsbLine.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbLine.Name = "tsbLine";
+            this.tsbLine.Size = new System.Drawing.Size(23, 22);
+            this.tsbLine.Text = "Линия";
+            this.tsbLine.Click += new System.EventHandler(this.ToolStripButtonTool_Click);
+            // 
+            // tsbEllipse
+            // 
+            this.tsbEllipse.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbEllipse.Image = ((System.Drawing.Image)(resources.GetObject("tsbEllipse.Image")));
+            this.tsbEllipse.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbEllipse.Name = "tsbEllipse";
+            this.tsbEllipse.Size = new System.Drawing.Size(23, 22);
+            this.tsbEllipse.Text = "Эллипс";
+            this.tsbEllipse.Click += new System.EventHandler(this.ToolStripButtonTool_Click);
+            // 
+            // tsbEraser
+            // 
+            this.tsbEraser.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbEraser.Image = ((System.Drawing.Image)(resources.GetObject("tsbEraser.Image")));
+            this.tsbEraser.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbEraser.Name = "tsbEraser";
+            this.tsbEraser.Size = new System.Drawing.Size(23, 22);
+            this.tsbEraser.Text = "Ластик";
+            this.tsbEraser.Click += new System.EventHandler(this.ToolStripButtonTool_Click);
+            // 
+            // tsbToggleFill
+            // 
+            this.tsbToggleFill.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbToggleFill.Image = ((System.Drawing.Image)(resources.GetObject("tsbToggleFill.Image")));
+            this.tsbToggleFill.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbToggleFill.Name = "tsbToggleFill";
+            this.tsbToggleFill.Size = new System.Drawing.Size(23, 22);
+            this.tsbToggleFill.Text = "toolStripButton1";
+            this.tsbToggleFill.Click += new System.EventHandler(this.ToolStripButtonTool_Click);
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolStripComboBoxWidth
+            // 
+            this.toolStripComboBoxWidth.Name = "toolStripComboBoxWidth";
+            this.toolStripComboBoxWidth.Size = new System.Drawing.Size(121, 25);
+            this.toolStripComboBoxWidth.Click += new System.EventHandler(this.ToolStripComboBoxWidth_SelectedIndexChanged);
             // 
             // MainForm
             // 
@@ -335,6 +419,15 @@
         private System.Windows.Forms.ToolStripMenuItem сохранитькакToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem выходToolStripMenuItem;
+        private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.ToolStripButton tsbPen;
+        private System.Windows.Forms.ToolStripButton tsbLine;
+        private System.Windows.Forms.ToolStripButton tsbEllipse;
+        private System.Windows.Forms.ToolStripButton tsbEraser;
+        private System.Windows.Forms.ToolStripButton tsbToggleFill;
+        private System.Windows.Forms.ToolStripComboBox toolStripComboBoxWidth;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
     }
 }
 

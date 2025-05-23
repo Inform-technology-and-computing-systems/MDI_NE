@@ -10,3 +10,4 @@ C:\Users\yarov\source\repos\MDIPaint\MDIPaint\obj\Debug\MDIPaint.csproj.Generate
 C:\Users\yarov\source\repos\MDIPaint\MDIPaint\obj\Debug\MDIPaint.csproj.CoreCompileInputs.cache
 C:\Users\yarov\source\repos\MDIPaint\MDIPaint\obj\Debug\MDIPaint.exe
 C:\Users\yarov\source\repos\MDIPaint\MDIPaint\obj\Debug\MDIPaint.pdb
+C:\Users\yarov\source\repos\MDIPaint\MDIPaint\obj\Debug\MDIPaint.CanvasSizeForm.resources
