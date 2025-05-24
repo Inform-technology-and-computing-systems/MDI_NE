@@ -108,7 +108,8 @@
             // открытьToolStripMenuItem
             // 
             this.открытьToolStripMenuItem.Name = "открытьToolStripMenuItem";
-            this.открытьToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.открытьToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
+            this.открытьToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.открытьToolStripMenuItem.Text = "&Открыть...";
             this.открытьToolStripMenuItem.Click += new System.EventHandler(this.открытьToolStripMenuItem_Click);
             // 
@@ -120,7 +121,8 @@
             // сохранитьToolStripMenuItem
             // 
             this.сохранитьToolStripMenuItem.Name = "сохранитьToolStripMenuItem";
-            this.сохранитьToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.сохранитьToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
+            this.сохранитьToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.сохранитьToolStripMenuItem.Text = "&Сохранить";
             this.сохранитьToolStripMenuItem.Click += new System.EventHandler(this.сохранитьToolStripMenuItem_Click);
             // 
@@ -155,8 +157,9 @@
             // размерХолстаToolStripMenuItem
             // 
             this.размерХолстаToolStripMenuItem.Name = "размерХолстаToolStripMenuItem";
-            this.размерХолстаToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.размерХолстаToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.размерХолстаToolStripMenuItem.Text = "&Размер холста...";
+            this.размерХолстаToolStripMenuItem.Click += new System.EventHandler(this.размерХолстаToolStripMenuItem_Click);
             // 
             // окноToolStripMenuItem
             // 
@@ -349,13 +352,14 @@
             // 
             // tsbToggleFill
             // 
+            this.tsbToggleFill.CheckOnClick = true;
             this.tsbToggleFill.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.tsbToggleFill.Image = ((System.Drawing.Image)(resources.GetObject("tsbToggleFill.Image")));
             this.tsbToggleFill.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbToggleFill.Name = "tsbToggleFill";
             this.tsbToggleFill.Size = new System.Drawing.Size(23, 22);
-            this.tsbToggleFill.Text = "toolStripButton1";
-            this.tsbToggleFill.Click += new System.EventHandler(this.ToolStripButtonTool_Click);
+            this.tsbToggleFill.Text = "Заливка";
+            this.tsbToggleFill.Click += new System.EventHandler(this.tsbToggleFill_Click);
             // 
             // toolStripSeparator4
             // 
