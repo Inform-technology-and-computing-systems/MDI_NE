@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Drawing;
-using System.Drawing.Imaging; // Для ImageFormat
+using System.Drawing.Imaging;
 using System.Windows.Forms;
 
 namespace MDIPaint
@@ -12,35 +12,32 @@ namespace MDIPaint
 
         public enum DrawingTool
         {
-            Pen,    // Уже есть
-            Line,   // 6-7 баллов
-            Ellipse,// 6-7 баллов
-            Eraser  // 6-7 баллов
+            Pen,
+            Line,
+            Ellipse,
+            Eraser
         }
         public static DrawingTool CurrentTool { get; private set; } = DrawingTool.Pen;
-        public static bool FillShapes { get; private set; } = false; // Для заливки фигур (6-7 баллов)
+        public static bool FillShapes { get; private set; } = false;
 
         public MainForm()
         {
             InitializeComponent();
 
-            // Настройка ComboBox для толщины (добавьте его в дизайнер, если еще нет)
-            // Убедитесь, что у вас есть элемент toolStripComboBoxWidth
+
             if (toolStripComboBoxWidth != null)
             {
                 toolStripComboBoxWidth.Items.AddRange(new object[] { "1", "2", "3", "5", "8", "10", "15" });
                 toolStripComboBoxWidth.SelectedItem = CurrentPenWidth.ToString();
                 toolStripComboBoxWidth.SelectedIndexChanged += ToolStripComboBoxWidth_SelectedIndexChanged;
             }
-            else if (tstxtPenWidth != null) // Если оставили TextBox
+            else if (tstxtPenWidth != null)
             {
                 tstxtPenWidth.Text = CurrentPenWidth.ToString();
-                // Подпишитесь на tstxtPenWidth.Validated или tstxtPenWidth.KeyDown (Enter)
             }
 
 
             UpdateUiState();
-            // Установить начальное состояние кнопок инструментов
             if (tsbPen != null) tsbPen.Checked = (CurrentTool == DrawingTool.Pen);
             if (tsbLine != null) tsbLine.Checked = (CurrentTool == DrawingTool.Line);
             if (tsbEllipse != null) tsbEllipse.Checked = (CurrentTool == DrawingTool.Ellipse);
@@ -53,34 +50,33 @@ namespace MDIPaint
             if (toolStripComboBoxWidth.SelectedItem != null &&
                 int.TryParse(toolStripComboBoxWidth.SelectedItem.ToString(), out int width))
             {
-                if (width > 0 && width < 100) // Ограничение
+                if (width > 0 && width < 100)
                 {
                     CurrentPenWidth = width;
                 }
             }
         }
-        // Если используете TextBox tstxtPenWidth, добавьте его обработчик Validated или KeyDown(Enter)
+
         private void tstxtPenWidth_Validated(object sender, EventArgs e)
         {
-            if (tstxtPenWidth == null) return; // Добавим проверку на всякий случай
+            if (tstxtPenWidth == null) return;
 
             if (int.TryParse(tstxtPenWidth.Text, out int width))
             {
-                if (width > 0 && width < 100) // Примерные ограничения
+                if (width > 0 && width < 100)
                 {
-                    MainForm.CurrentPenWidth = width; // <--- Присваиваем значение статическому свойству
-                                                      // System.Diagnostics.Debug.WriteLine($"Pen width set to: {MainForm.CurrentPenWidth}"); // Для отладки
+                    MainForm.CurrentPenWidth = width;
                 }
                 else
                 {
                     MessageBox.Show("Толщина должна быть числом от 1 до 99.", "Ошибка ввода", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    tstxtPenWidth.Text = MainForm.CurrentPenWidth.ToString(); // Вернуть предыдущее корректное значение
+                    tstxtPenWidth.Text = MainForm.CurrentPenWidth.ToString();
                 }
             }
             else
             {
                 MessageBox.Show("Пожалуйста, введите числовое значение для толщины.", "Ошибка ввода", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                tstxtPenWidth.Text = MainForm.CurrentPenWidth.ToString(); // Вернуть предыдущее корректное значение
+                tstxtPenWidth.Text = MainForm.CurrentPenWidth.ToString();
             }
         }
 
@@ -93,8 +89,6 @@ namespace MDIPaint
             frm.Show();
         }
 
-        // --- Обработчики цвета (красный, синий, зеленый, другой) ---
-        // Эти методы у вас уже есть и они корректны
         private void красныйToolStripMenuItem_Click(object sender, EventArgs e)
         {
             CurrentColor = Color.Red;
@@ -119,14 +113,9 @@ namespace MDIPaint
             if (cd.ShowDialog() == DialogResult.OK)
             {
                 CurrentColor = cd.Color;
-                // Можно создать однотонную иконку для tsddbColor, если хотите
             }
         }
-        // --- Конец обработчиков цвета ---
 
-        // --- Файловые операции (Открыть, Сохранить, Сохранить как) ---
-        // Эти методы у вас уже есть и они в целом корректны
-        // Убедитесь, что в "Сохранить" и "Сохранить как" используется ImageFormat.Png для .png
         private void сохранитькакToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DocumentForm activeChild = this.ActiveMdiChild as DocumentForm;
@@ -136,7 +125,6 @@ namespace MDIPaint
                 dlg.AddExtension = true;
                 dlg.Filter = "Windows Bitmap (*.bmp)|*.bmp|JPEG Image (*.jpg)|*.jpg|PNG Image (*.png)|*.png";
                 dlg.Title = "Сохранить изображение как...";
-                // Предлагаем имя без звездочки, если она есть
                 string currentName = activeChild.Text;
                 if (currentName.EndsWith("*"))
                 {
@@ -155,17 +143,15 @@ namespace MDIPaint
                             case ".jpg": case ".jpeg": selectedFormat = ImageFormat.Jpeg; break;
                             case ".png": selectedFormat = ImageFormat.Png; break;
                         }
-                        activeChild.SaveBitmap(dlg.FileName, selectedFormat); // SaveBitmap должен сбрасывать IsDirty
+                        activeChild.SaveBitmap(dlg.FileName, selectedFormat);
                         activeChild.FilePath = dlg.FileName;
                         activeChild.Text = System.IO.Path.GetFileName(dlg.FileName);
-                        // IsDirty сбрасывается внутри SaveBitmap, если успешно
                     }
                     catch (Exception ex)
                     {
                         MessageBox.Show("Ошибка при сохранении файла: " + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
-                // Если пользователь нажал "Отмена", IsDirty не меняется, и FilePath тоже.
             }
         }
         private void сохранитьToolStripMenuItem_Click(object sender, EventArgs e)
@@ -173,30 +159,28 @@ namespace MDIPaint
             DocumentForm activeChild = this.ActiveMdiChild as DocumentForm;
             if (activeChild != null)
             {
-                if (string.IsNullOrEmpty(activeChild.FilePath)) // Если путь не задан, то это "Сохранить как"
+                if (string.IsNullOrEmpty(activeChild.FilePath))
                 {
                     сохранитькакToolStripMenuItem_Click(sender, e);
                 }
-                else if (activeChild.IsDirty) // Если путь есть И есть изменения
+                else if (activeChild.IsDirty)
                 {
                     try
                     {
-                        ImageFormat format = ImageFormat.Bmp; // Определить формат по расширению
+                        ImageFormat format = ImageFormat.Bmp;
                         string extension = System.IO.Path.GetExtension(activeChild.FilePath).ToLower();
                         switch (extension)
                         {
                             case ".jpg": case ".jpeg": format = ImageFormat.Jpeg; break;
                             case ".png": format = ImageFormat.Png; break;
                         }
-                        activeChild.SaveBitmap(activeChild.FilePath, format); // SaveBitmap должен сбрасывать IsDirty
-                                                                              // IsDirty сбрасывается внутри SaveBitmap, если успешно
+                        activeChild.SaveBitmap(activeChild.FilePath, format);
                     }
                     catch (Exception ex)
                     {
                         MessageBox.Show("Ошибка при сохранении файла: " + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
-                // Если путь есть и IsDirty = false, ничего не делаем
             }
         }
         private void открытьToolStripMenuItem_Click(object sender, EventArgs e)
@@ -213,8 +197,8 @@ namespace MDIPaint
                     frm.LoadBitmap(dlg.FileName);
                     frm.MdiParent = this;
                     frm.FilePath = dlg.FileName;
-                    frm.Text = System.IO.Path.GetFileName(dlg.FileName); // Установить заголовок
-                    frm.IsDirty = false; // Свежеоткрытый файл не изменен
+                    frm.Text = System.IO.Path.GetFileName(dlg.FileName);
+                    frm.IsDirty = false;
                     frm.Show();
                 }
                 catch (Exception ex)
@@ -223,20 +207,16 @@ namespace MDIPaint
                 }
             }
         }
-        // --- Конец файловых операций ---
 
-        // --- Расположение окон (Каскадом и т.д.) ---
-        // Эти методы у вас есть и они корректны
         private void каскадомToolStripMenuItem_Click(object sender, EventArgs e) { this.LayoutMdi(MdiLayout.Cascade); }
         private void слеванаправоToolStripMenuItem_Click(object sender, EventArgs e) { this.LayoutMdi(MdiLayout.TileHorizontal); }
         private void сверхуВнизToolStripMenuItem_Click(object sender, EventArgs e) { this.LayoutMdi(MdiLayout.TileVertical); }
         private void упорядочитьЗначкиToolStripMenuItem_Click(object sender, EventArgs e) { this.LayoutMdi(MdiLayout.ArrangeIcons); }
-        // --- Конец расположения окон ---
 
         private void оПрограммеToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AboutForm frmAbout = new AboutForm();
-            frmAbout.ShowDialog(this); // Показываем как модальное окно относительно MainForm
+            frmAbout.ShowDialog(this);
         }
 
         private void выходToolStripMenuItem_Click(object sender, EventArgs e)
@@ -260,18 +240,14 @@ namespace MDIPaint
                     MessageBoxIcon.Warning);
                 if (result == DialogResult.No)
                 {
-                    return; // Отменяем выход
+                    return;
                 }
             }
             Application.Exit();
         }
 
-        // Общий обработчик для кнопок инструментов
-        // Убедитесь, что у вас есть кнопки tsbPen, tsbLine, tsbEllipse, tsbEraser
-        // и им назначен этот обработчик. Также установите CheckOnClick = True для них.
         private void ToolStripButtonTool_Click(object sender, EventArgs e)
         {
-            // Снимаем Checked со всех кнопок инструментов
             if (tsbPen != null) tsbPen.Checked = false;
             if (tsbLine != null) tsbLine.Checked = false;
             if (tsbEllipse != null) tsbEllipse.Checked = false;
@@ -290,8 +266,6 @@ namespace MDIPaint
             UpdateChildFormCursor();
         }
 
-        // Обработчик для кнопки "Заливка фигур" (tsbToggleFill)
-        // Установите CheckOnClick = True для этой кнопки
         private void tsbToggleFill_Click(object sender, EventArgs e)
         {
             if (tsbToggleFill != null)
@@ -310,7 +284,7 @@ namespace MDIPaint
                         activeDoc.Cursor = Cursors.Cross;
                         break;
                     case DrawingTool.Eraser:
-                        activeDoc.Cursor = Cursors.Default; // Или создайте свой курсор-ластик
+                        activeDoc.Cursor = Cursors.Default;
                         break;
                     default:
                         activeDoc.Cursor = Cursors.Default;
@@ -325,14 +299,14 @@ namespace MDIPaint
 
             сохранитьToolStripMenuItem.Enabled = isChildActive;
             сохранитькакToolStripMenuItem.Enabled = isChildActive;
-            размерХолстаToolStripMenuItem.Enabled = isChildActive; // Для "Размер холста"
+            размерХолстаToolStripMenuItem.Enabled = isChildActive;
 
             каскадомToolStripMenuItem.Enabled = isChildActive;
             слеванаправоToolStripMenuItem.Enabled = isChildActive;
             сверхуВнизToolStripMenuItem.Enabled = isChildActive;
             упорядочитьЗначкиToolStripMenuItem.Enabled = isChildActive;
 
-            // Элементы ToolStrip
+
             if (tsddbColor != null) tsddbColor.Enabled = isChildActive;
             if (toolStripComboBoxWidth != null) toolStripComboBoxWidth.Enabled = isChildActive;
             else if (tstxtPenWidth != null) tstxtPenWidth.Enabled = isChildActive;
@@ -345,7 +319,6 @@ namespace MDIPaint
             if (tsbToggleFill != null) tsbToggleFill.Enabled = isChildActive;
 
 
-            // Установка Checked состояния при активации окна
             if (isChildActive)
             {
                 if (tsbPen != null) tsbPen.Checked = (CurrentTool == DrawingTool.Pen);
@@ -362,40 +335,32 @@ namespace MDIPaint
             UpdateChildFormCursor();
         }
 
-        // Метод для "Сохранить" из DocumentForm_FormClosing
-        public bool SaveActiveDocument() // Возвращает true, если сохранение прошло успешно (или не требовалось), false - если пользователь отменил
+        public bool SaveActiveDocument()
         {
             DocumentForm activeChild = this.ActiveMdiChild as DocumentForm;
-            if (activeChild == null) return true; // Нет активного документа, нечего сохранять
+            if (activeChild == null) return true;
 
-            if (string.IsNullOrEmpty(activeChild.FilePath)) // Если путь не задан, всегда "Сохранить как"
+            if (string.IsNullOrEmpty(activeChild.FilePath))
             {
-                // Вызываем логику "Сохранить как"
-                // Обратите внимание, что сохранитькакToolStripMenuItem_Click не возвращает bool,
-                // поэтому нам нужно проверить IsDirty и FilePath после его вызова.
-                сохранитькакToolStripMenuItem_Click(this, EventArgs.Empty); // Передаем фиктивные аргументы
-                return !activeChild.IsDirty && !string.IsNullOrEmpty(activeChild.FilePath); // Успешно, если файл теперь сохранен и не "грязный"
+                сохранитькакToolStripMenuItem_Click(this, EventArgs.Empty);
+                return !activeChild.IsDirty && !string.IsNullOrEmpty(activeChild.FilePath);
             }
-            else // Путь есть, используем "Сохранить"
+            else
             {
-                // Вызываем логику "Сохранить"
                 сохранитьToolStripMenuItem_Click(this, EventArgs.Empty);
-                return !activeChild.IsDirty; // Успешно, если файл теперь не "грязный"
+                return !activeChild.IsDirty;
             }
         }
 
-        // Обработчик для меню "Рисунок" -> "Размер холста"
         private void размерХолстаToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DocumentForm activeDoc = this.ActiveMdiChild as DocumentForm;
             if (activeDoc == null) return;
 
-            // Создаем и показываем форму для ввода размера
-            // Убедитесь, что CanvasSizeForm существует и настроена
             using (CanvasSizeForm sizeDialog = new CanvasSizeForm())
             {
-                sizeDialog.CanvasWidth = activeDoc.BitmapWidth;  // Предполагаем, что есть свойство для получения размера Bitmap
-                sizeDialog.CanvasHeight = activeDoc.BitmapHeight; // в DocumentForm
+                sizeDialog.CanvasWidth = activeDoc.BitmapWidth;
+                sizeDialog.CanvasHeight = activeDoc.BitmapHeight;
 
                 if (sizeDialog.ShowDialog(this) == DialogResult.OK)
                 {

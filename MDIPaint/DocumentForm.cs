@@ -1,23 +1,22 @@
 ﻿using System;
 using System.Drawing;
-using System.Drawing.Drawing2D; // Для SmoothingMode, LineCap, DashStyle
+using System.Drawing.Drawing2D;
 using System.Windows.Forms;
-using System.Drawing.Imaging;   // Для ImageFormat
+using System.Drawing.Imaging;
 
 namespace MDIPaint
 {
     public partial class DocumentForm : Form
     {
         private Bitmap bitmap;
-        private Point startPoint;   // Для всех инструментов, требующих начальной точки
-        private Point currentPoint; // Для превью
-        private bool isDrawing = false;    // Для непрерывного рисования (Перо, Ластик)
-        private bool isPreviewing = false; // Для превью (Линия, Эллипс)
+        private Point startPoint;
+        private Point currentPoint;
+        private bool isDrawing = false;
+        private bool isPreviewing = false;
 
         public string FilePath { get; set; } = null;
         public bool IsDirty { get; set; } = false;
 
-        // Свойства для получения размеров Bitmap (для "Размер холста")
         public int BitmapWidth => bitmap?.Width ?? 0;
         public int BitmapHeight => bitmap?.Height ?? 0;
 
@@ -25,21 +24,21 @@ namespace MDIPaint
         public DocumentForm()
         {
             InitializeComponent();
-            InitializeCanvas(800, 600); // Используем новый метод
-            this.DoubleBuffered = true; // Уменьшение мерцания
-            this.FormClosing += DocumentForm_FormClosing; // Запрос на сохранение
+            InitializeCanvas(800, 600);
+            this.DoubleBuffered = true;
+            this.FormClosing += DocumentForm_FormClosing;
             this.MouseEnter += (s, e) => (this.MdiParent as MainForm)?.UpdateChildFormCursor();
         }
 
         private void InitializeCanvas(int width, int height, Bitmap existingBitmap = null)
         {
-            Bitmap oldBitmap = bitmap; // Сохраняем ссылку на старый, чтобы освободить память
+            Bitmap oldBitmap = bitmap;
 
-            if (existingBitmap != null) // Если передали существующий Bitmap (например, при загрузке)
+            if (existingBitmap != null)
             {
-                bitmap = existingBitmap; // Используем его
+                bitmap = existingBitmap;
             }
-            else // Создаем новый пустой Bitmap
+            else
             {
                 bitmap = new Bitmap(width, height, PixelFormat.Format32bppPArgb);
                 using (Graphics g = Graphics.FromImage(bitmap))
@@ -48,18 +47,17 @@ namespace MDIPaint
                 }
             }
 
-            if (oldBitmap != null && oldBitmap != bitmap) // Если был старый и он не тот же, что новый
+            if (oldBitmap != null && oldBitmap != bitmap)
             {
-                oldBitmap.Dispose(); // Освобождаем память от старого
+                oldBitmap.Dispose();
             }
 
-            this.ClientSize = new Size(bitmap.Width, bitmap.Height); // Размер окна под Bitmap
-            this.AutoScrollMinSize = new Size(bitmap.Width, bitmap.Height); // Для прокрутки
-            this.IsDirty = (existingBitmap == null); // Новый холст - грязный, загруженный - нет
-            this.Invalidate(); // Запросить перерисовку
+            this.ClientSize = new Size(bitmap.Width, bitmap.Height);
+            this.AutoScrollMinSize = new Size(bitmap.Width, bitmap.Height);
+            this.IsDirty = (existingBitmap == null);
+            this.Invalidate();
         }
 
-        // Метод для изменения размера холста извне (например, из MainForm)
         public void ResizeCanvas(int newWidth, int newHeight)
         {
             if (bitmap == null || (bitmap.Width == newWidth && bitmap.Height == newHeight))
@@ -71,7 +69,6 @@ namespace MDIPaint
             using (Graphics g = Graphics.FromImage(newBitmap))
             {
                 g.Clear(Color.White);
-                // Копируем содержимое старого изображения в левый верхний угол нового
                 g.DrawImage(oldBitmap, 0, 0);
             }
 
@@ -88,7 +85,6 @@ namespace MDIPaint
         {
             if (e.Button == MouseButtons.Left && bitmap != null)
             {
-                // Координаты мыши относительно AutoScrollPosition
                 startPoint = new Point(e.X - AutoScrollPosition.X, e.Y - AutoScrollPosition.Y);
                 currentPoint = startPoint;
 
@@ -97,12 +93,12 @@ namespace MDIPaint
                     case MainForm.DrawingTool.Pen:
                     case MainForm.DrawingTool.Eraser:
                         isDrawing = true;
-                        DrawStep(currentPoint); // Первый мазок/стирание
+                        DrawStep(currentPoint);
                         break;
                     case MainForm.DrawingTool.Line:
                     case MainForm.DrawingTool.Ellipse:
                         isPreviewing = true;
-                        this.Capture = true; // Захват мыши для рисования превью вне окна
+                        this.Capture = true;
                         break;
                 }
             }
@@ -110,17 +106,16 @@ namespace MDIPaint
 
         private void DocumentForm_MouseMove(object sender, MouseEventArgs e)
         {
-            // Координаты мыши относительно AutoScrollPosition
             Point mousePosOnBitmap = new Point(e.X - AutoScrollPosition.X, e.Y - AutoScrollPosition.Y);
-            currentPoint = mousePosOnBitmap; // Обновляем всегда для превью
+            currentPoint = mousePosOnBitmap;
 
-            if (isDrawing) // Перо или Ластик
+            if (isDrawing)
             {
                 DrawStep(mousePosOnBitmap);
             }
-            else if (isPreviewing) // Линия или Эллипс (превью)
+            else if (isPreviewing)
             {
-                this.Refresh(); // Вызовет OnPaint, который отрисует bitmap, затем превью
+                this.Refresh();
             }
         }
 
@@ -128,7 +123,6 @@ namespace MDIPaint
         {
             if (e.Button == MouseButtons.Left)
             {
-                // Координаты мыши относительно AutoScrollPosition
                 Point mouseUpPosOnBitmap = new Point(e.X - AutoScrollPosition.X, e.Y - AutoScrollPosition.Y);
 
                 if (isDrawing)
@@ -141,7 +135,7 @@ namespace MDIPaint
                     this.Capture = false;
                     using (Graphics gBitmap = Graphics.FromImage(bitmap))
                     {
-                        DrawShapeFinal(gBitmap, startPoint, mouseUpPosOnBitmap); // Финальная точка
+                        DrawShapeFinal(gBitmap, startPoint, mouseUpPosOnBitmap);
                     }
                     this.IsDirty = true;
                     this.Invalidate();
@@ -151,25 +145,20 @@ namespace MDIPaint
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            // Не вызываем base.OnPaint(e);
             if (bitmap != null)
             {
-                // Рисуем Bitmap с учетом прокрутки
                 e.Graphics.DrawImage(bitmap, this.AutoScrollPosition.X, this.AutoScrollPosition.Y);
             }
 
-            // Рисуем превью поверх, если активен режим превью
             if (isPreviewing)
             {
-                // Превью рисуется в координатах ОКНА (не Bitmap)
-                // startPoint и currentPoint уже в координатах Bitmap, их нужно преобразовать обратно
                 Point previewStart = new Point(startPoint.X + AutoScrollPosition.X, startPoint.Y + AutoScrollPosition.Y);
                 Point previewCurrent = new Point(currentPoint.X + AutoScrollPosition.X, currentPoint.Y + AutoScrollPosition.Y);
                 DrawShapePreview(e.Graphics, previewStart, previewCurrent);
             }
         }
 
-        private void DrawStep(Point currentPosOnBitmap) // currentPosOnBitmap уже в координатах Bitmap
+        private void DrawStep(Point currentPosOnBitmap)
         {
             if (bitmap == null) return;
 
@@ -192,16 +181,15 @@ namespace MDIPaint
                             currentPosOnBitmap.X - eraserSize / 2,
                             currentPosOnBitmap.Y - eraserSize / 2,
                             eraserSize, eraserSize);
-                        g.FillRectangle(Brushes.White, eraseRect); // Стираем белым
+                        g.FillRectangle(Brushes.White, eraseRect);
                         break;
                 }
             }
             this.IsDirty = true;
-            startPoint = currentPosOnBitmap; // Обновляем startPoint для следующего шага
-            this.Invalidate(); // Перерисовать видимую часть
+            startPoint = currentPosOnBitmap;
+            this.Invalidate();
         }
 
-        // Рисуем превью на графике ОКНА (gForm)
         private void DrawShapePreview(Graphics gForm, Point p1Window, Point p2Window)
         {
             using (Pen previewPen = new Pen(Color.Gray, 1))
@@ -219,8 +207,6 @@ namespace MDIPaint
             }
         }
 
-        // Рисуем финальную фигуру на графике BITMAP (gBitmap)
-        // p1Bitmap и p2Bitmap уже в координатах Bitmap
         private void DrawShapeFinal(Graphics gBitmap, Point p1Bitmap, Point p2Bitmap)
         {
             gBitmap.SmoothingMode = SmoothingMode.AntiAlias;
@@ -264,12 +250,11 @@ namespace MDIPaint
                 try
                 {
                     bitmap.Save(path, format);
-                    this.IsDirty = false; // <--- СБРОС ФЛАГА ПОСЛЕ УСПЕШНОГО СОХРАНЕНИЯ
+                    this.IsDirty = false;
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show("Ошибка сохранения Bitmap: " + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    // Здесь IsDirty не сбрасываем, так как сохранение не удалось
                 }
             }
         }
@@ -278,22 +263,20 @@ namespace MDIPaint
         {
             try
             {
-                // Сначала загружаем в временный Bitmap, чтобы не испортить текущий в случае ошибки
                 Bitmap loadedBitmap = new Bitmap(path);
-                InitializeCanvas(loadedBitmap.Width, loadedBitmap.Height, loadedBitmap); // Передаем загруженный Bitmap
-                this.IsDirty = false; // Сразу после загрузки файл не изменен
+                InitializeCanvas(loadedBitmap.Width, loadedBitmap.Height, loadedBitmap);
+                this.IsDirty = false;
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Ошибка загрузки изображения: " + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                // В случае ошибки можно создать пустой холст или ничего не делать
-                InitializeCanvas(800, 600); // Создаем пустой холст по умолчанию
+                InitializeCanvas(800, 600);
             }
         }
 
         private void DocumentForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (this.IsDirty) // Только если есть несохраненные изменения
+            if (this.IsDirty)
             {
                 DialogResult result = MessageBox.Show(
                     $"Сохранить изменения в файле \"{this.Text}\"?",
@@ -306,25 +289,20 @@ namespace MDIPaint
                     bool savedSuccessfully = false;
                     if (this.MdiParent is MainForm main)
                     {
-                        this.Activate(); // Убедимся, что это активное окно для main.SaveActiveDocument()
+                        this.Activate();
 
-                        // Вот ключевой момент: SaveActiveDocument должен сам решить,
-                        // использовать "Сохранить" или "Сохранить как".
                         savedSuccessfully = main.SaveActiveDocument();
                     }
 
                     if (!savedSuccessfully)
                     {
-                        // Если сохранение не удалось (например, пользователь нажал "Отмена" в диалоге "Сохранить как")
-                        e.Cancel = true; // Отменяем закрытие
+                        e.Cancel = true;
                     }
-                    // Если savedSuccessfully == true, то IsDirty уже должен быть сброшен внутри SaveBitmap или SaveActiveDocumentAs
                 }
                 else if (result == DialogResult.Cancel)
                 {
-                    e.Cancel = true; // Отменяем закрытие
+                    e.Cancel = true;
                 }
-                // Если No, то просто закрываем без сохранения, IsDirty остается true, но окно закрывается
             }
         }
     }
